@@ -202,6 +202,6 @@ public partial class MainWindow : Window
         // Uncomment following line to change the Icon shown on the updater dialog.
         AutoUpdater.Icon = Resource.Icon;
 
-        AutoUpdater.Start("/NewMESClient/ClientUpdate/UpdateVersion.xml", new SftpConfig() { Host="Sftpprd.lcfuturecenter.com",Port= 990, UserName= "NewMESClient",Password= "fX2%hH4]" });
+        AutoUpdater.Start("/NewMESClient/ClientUpdate/UpdateVersion.xml", new SftpConfig() { Host="Sftpprd.www.com",Port= 990, UserName= "NewMESClient",Password= "fX2%hH4]" });
     }
 }
