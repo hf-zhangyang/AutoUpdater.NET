@@ -29,107 +29,99 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemindLaterForm));
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.labelDescription = new System.Windows.Forms.Label();
-            this.radioButtonYes = new System.Windows.Forms.RadioButton();
-            this.radioButtonNo = new System.Windows.Forms.RadioButton();
-            this.comboBoxRemindLater = new System.Windows.Forms.ComboBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
-            this.tableLayoutPanel.SuspendLayout();
-            this.SuspendLayout();
+            labelTitle = new System.Windows.Forms.Label();
+            pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            labelDescription = new System.Windows.Forms.Label();
+            radioButtonYes = new System.Windows.Forms.RadioButton();
+            radioButtonNo = new System.Windows.Forms.RadioButton();
+            comboBoxRemindLater = new System.Windows.Forms.ComboBox();
+            buttonOK = new System.Windows.Forms.Button();
+            tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).BeginInit();
+            tableLayoutPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // labelTitle
             // 
-            resources.ApplyResources(this.labelTitle, "labelTitle");
-            this.tableLayoutPanel.SetColumnSpan(this.labelTitle, 2);
-            this.labelTitle.Name = "labelTitle";
+            resources.ApplyResources(labelTitle, "labelTitle");
+            tableLayoutPanel.SetColumnSpan(labelTitle, 2);
+            labelTitle.Name = "labelTitle";
             // 
             // pictureBoxIcon
             // 
-            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
-            this.pictureBoxIcon.Image = global::AutoUpdaterDotNET.Properties.Resources.clock_go_32;
-            this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.tableLayoutPanel.SetRowSpan(this.pictureBoxIcon, 2);
-            this.pictureBoxIcon.TabStop = false;
+            resources.ApplyResources(pictureBoxIcon, "pictureBoxIcon");
+            pictureBoxIcon.Image = Properties.Resources.clock_go_32;
+            pictureBoxIcon.Name = "pictureBoxIcon";
+            tableLayoutPanel.SetRowSpan(pictureBoxIcon, 2);
+            pictureBoxIcon.TabStop = false;
             // 
             // labelDescription
             // 
-            resources.ApplyResources(this.labelDescription, "labelDescription");
-            this.tableLayoutPanel.SetColumnSpan(this.labelDescription, 2);
-            this.labelDescription.Name = "labelDescription";
+            resources.ApplyResources(labelDescription, "labelDescription");
+            tableLayoutPanel.SetColumnSpan(labelDescription, 2);
+            labelDescription.Name = "labelDescription";
             // 
             // radioButtonYes
             // 
-            resources.ApplyResources(this.radioButtonYes, "radioButtonYes");
-            this.radioButtonYes.Checked = true;
-            this.radioButtonYes.Name = "radioButtonYes";
-            this.radioButtonYes.TabStop = true;
-            this.radioButtonYes.UseVisualStyleBackColor = true;
-            this.radioButtonYes.CheckedChanged += new System.EventHandler(this.RadioButtonYesCheckedChanged);
+            resources.ApplyResources(radioButtonYes, "radioButtonYes");
+            radioButtonYes.Checked = true;
+            radioButtonYes.Name = "radioButtonYes";
+            radioButtonYes.TabStop = true;
+            radioButtonYes.UseVisualStyleBackColor = true;
+            radioButtonYes.CheckedChanged += RadioButtonYesCheckedChanged;
             // 
             // radioButtonNo
             // 
-            resources.ApplyResources(this.radioButtonNo, "radioButtonNo");
-            this.tableLayoutPanel.SetColumnSpan(this.radioButtonNo, 2);
-            this.radioButtonNo.Name = "radioButtonNo";
-            this.radioButtonNo.UseVisualStyleBackColor = true;
+            resources.ApplyResources(radioButtonNo, "radioButtonNo");
+            tableLayoutPanel.SetColumnSpan(radioButtonNo, 2);
+            radioButtonNo.Name = "radioButtonNo";
+            radioButtonNo.UseVisualStyleBackColor = true;
             // 
             // comboBoxRemindLater
             // 
-            resources.ApplyResources(this.comboBoxRemindLater, "comboBoxRemindLater");
-            this.comboBoxRemindLater.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRemindLater.FormattingEnabled = true;
-            this.comboBoxRemindLater.Items.AddRange(new object[] {
-            resources.GetString("comboBoxRemindLater.Items"),
-            resources.GetString("comboBoxRemindLater.Items1"),
-            resources.GetString("comboBoxRemindLater.Items2"),
-            resources.GetString("comboBoxRemindLater.Items3"),
-            resources.GetString("comboBoxRemindLater.Items4"),
-            resources.GetString("comboBoxRemindLater.Items5"),
-            resources.GetString("comboBoxRemindLater.Items6")});
-            this.comboBoxRemindLater.Name = "comboBoxRemindLater";
+            resources.ApplyResources(comboBoxRemindLater, "comboBoxRemindLater");
+            comboBoxRemindLater.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxRemindLater.FormattingEnabled = true;
+            comboBoxRemindLater.Items.AddRange(new object[] { resources.GetString("comboBoxRemindLater.Items"), resources.GetString("comboBoxRemindLater.Items1"), resources.GetString("comboBoxRemindLater.Items2"), resources.GetString("comboBoxRemindLater.Items3"), resources.GetString("comboBoxRemindLater.Items4"), resources.GetString("comboBoxRemindLater.Items5"), resources.GetString("comboBoxRemindLater.Items6") });
+            comboBoxRemindLater.Name = "comboBoxRemindLater";
             // 
             // buttonOK
             // 
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            resources.ApplyResources(this.buttonOK, "buttonOK");
-            this.buttonOK.Image = global::AutoUpdaterDotNET.Properties.Resources.clock_play;
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.ButtonOkClick);
+            buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(buttonOK, "buttonOK");
+            buttonOK.Image = Properties.Resources.clock_play;
+            buttonOK.Name = "buttonOK";
+            buttonOK.UseVisualStyleBackColor = true;
+            buttonOK.Click += ButtonOkClick;
             // 
             // tableLayoutPanel
             // 
-            resources.ApplyResources(this.tableLayoutPanel, "tableLayoutPanel");
-            this.tableLayoutPanel.Controls.Add(this.pictureBoxIcon, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelTitle, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.radioButtonNo, 1, 3);
-            this.tableLayoutPanel.Controls.Add(this.comboBoxRemindLater, 2, 2);
-            this.tableLayoutPanel.Controls.Add(this.radioButtonYes, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.labelDescription, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.buttonOK, 2, 4);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            resources.ApplyResources(tableLayoutPanel, "tableLayoutPanel");
+            tableLayoutPanel.Controls.Add(pictureBoxIcon, 0, 0);
+            tableLayoutPanel.Controls.Add(labelTitle, 1, 0);
+            tableLayoutPanel.Controls.Add(radioButtonNo, 1, 3);
+            tableLayoutPanel.Controls.Add(comboBoxRemindLater, 2, 2);
+            tableLayoutPanel.Controls.Add(radioButtonYes, 1, 2);
+            tableLayoutPanel.Controls.Add(labelDescription, 1, 1);
+            tableLayoutPanel.Controls.Add(buttonOK, 2, 4);
+            tableLayoutPanel.Name = "tableLayoutPanel";
             // 
             // RemindLaterForm
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "RemindLaterForm";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.Load += new System.EventHandler(this.RemindLaterFormLoad);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(tableLayoutPanel);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "RemindLaterForm";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            Load += RemindLaterFormLoad;
+            ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).EndInit();
+            tableLayoutPanel.ResumeLayout(false);
+            tableLayoutPanel.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion

@@ -124,8 +124,8 @@ internal sealed partial class UpdateForm : Form
                 object _,
                 CoreWebView2BasicAuthenticationRequestedEventArgs args)
             {
-                args.Response.UserName = ((BasicAuthentication)AutoUpdater.BasicAuthChangeLog).Username;
-                args.Response.Password = ((BasicAuthentication)AutoUpdater.BasicAuthChangeLog).Password;
+                //args.Response.UserName = ((BasicAuthentication)AutoUpdater.BasicAuthChangeLog).Username;
+                //args.Response.Password = ((BasicAuthentication)AutoUpdater.BasicAuthChangeLog).Password;
             };
         }
 

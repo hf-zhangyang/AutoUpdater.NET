@@ -18,6 +18,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;
 using WinFormsMethodInvoker = System.Windows.Forms.MethodInvoker;
+using Renci.SshNet;
 
 namespace AutoUpdaterDotNET;
 
@@ -95,7 +96,7 @@ public static class AutoUpdater
 
     private static Timer _remindLaterTimer;
 
-    internal static Uri BaseUri;
+    internal static string BaseUri;
 
     internal static bool Running;
 
@@ -145,6 +146,11 @@ public static class AutoUpdater
     ///     Login/password/domain for FTP-request
     /// </summary>
     public static NetworkCredential FtpCredentials;
+
+    /// <summary>
+    /// Login/password/domain for SFTP-request
+    /// </summary>
+    public static SftpConfig SftpCredentials;
 
     /// <summary>
     ///     Set the User-Agent string to be used for HTTP web requests.
@@ -294,7 +300,17 @@ public static class AutoUpdater
         FtpCredentials = ftpCredentials;
         Start(appCast, myAssembly);
     }
-
+    /// <summary>
+    ///     Start checking for new version of application via FTP and display a dialog to the user if update is available.
+    /// </summary>
+    /// <param name="appCast">FTP URL of the xml file that contains information about latest version of the application.</param>
+    /// <param name="sftpCredentials">Credentials required to connect to FTP server.</param>
+    /// <param name="myAssembly">Assembly to use for version checking.</param>
+    public static void Start(string appCast, SftpConfig sftpCredentials, Assembly myAssembly = null)
+    {
+        SftpCredentials = sftpCredentials;
+        Start(appCast, myAssembly);
+    }
     /// <summary>
     ///     Start checking for new version of application and display a dialog to the user if update is available.
     /// </summary>
@@ -410,8 +426,8 @@ public static class AutoUpdater
 
         if (AppCastURL != null)
         {
-            BaseUri = new Uri(AppCastURL);
-            using MyWebClient client = GetWebClient(BaseUri, BasicAuthXML);
+            BaseUri = AppCastURL;
+            IDownClient client = GetWebClient(null, BasicAuthXML);
             xml = client.DownloadString(BaseUri);
         }
 
@@ -730,29 +746,34 @@ public static class AutoUpdater
         }
     }
 
-    internal static MyWebClient GetWebClient(Uri uri, IAuthentication basicAuthentication)
+    internal static IDownClient GetWebClient(Uri uri, IAuthentication basicAuthentication)
     {
-        var webClient = new MyWebClient
+        //if (uri.Scheme.Equals(Uri.UriSchemeSftp))
         {
-            CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
-        };
-
-        if (Proxy != null)
-        {
-            webClient.Proxy = Proxy;
+            var IDownClient = new SftpDownClient(SftpCredentials);
+            return IDownClient;
         }
+        // var webClient = new MyWebClient
+        //{
+        //    CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
+        //};
 
-        if (uri.Scheme.Equals(Uri.UriSchemeFtp))
-        {
-            webClient.Credentials = FtpCredentials;
-        }
-        else
-        {
-            basicAuthentication?.Apply(ref webClient);
+        //if (Proxy != null)
+        //{
+        //    webClient.Proxy = Proxy;
+        //}
 
-            webClient.Headers[HttpRequestHeader.UserAgent] = HttpUserAgent;
-        }
+        //if (uri.Scheme.Equals(Uri.UriSchemeFtp))
+        //{
+        //    webClient.Credentials = FtpCredentials;
+        //}
+        //else
+        //{
+        //    basicAuthentication?.Apply(ref webClient);
 
-        return webClient;
+        //    webClient.Headers[HttpRequestHeader.UserAgent] = HttpUserAgent;
+        //}
+
+        //return webClient;
     }
 }

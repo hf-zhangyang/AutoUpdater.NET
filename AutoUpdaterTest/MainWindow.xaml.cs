@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Net;
 using System.Reflection;
 using System.Windows;
 using AutoUpdaterDotNET;
+using Renci.SshNet;
 
 namespace AutoUpdaterTest;
 
@@ -64,10 +66,10 @@ public partial class MainWindow : Window
         // AutoUpdater.RemindLaterAt = 2;
 
         // Uncomment following line if you don't want to show Skip button.
-        // AutoUpdater.ShowSkipButton = false;
+         AutoUpdater.ShowSkipButton = false;
 
         // Uncomment following line if you don't want to show Remind Later button.
-        // AutoUpdater.ShowRemindLaterButton = false;
+         AutoUpdater.ShowRemindLaterButton = false;
 
         // Uncomment following line to show custom application title in AutoUpdater notification window.
         // AutoUpdater.AppTitle = "My Custom Application Title";
@@ -183,13 +185,13 @@ public partial class MainWindow : Window
         // AutoUpdater.Synchronous = true;
 
         // Uncomment following line if you want to assign installed version manually and don't want to rely on the library to determine the installed version from assembly.
-        // AutoUpdater.InstalledVersion = new Version("2.0.0.1");
+         AutoUpdater.InstalledVersion = new Version("1.0.0.1");
 
         // Uncomment following line if you want to clear application directory before update zip is extracted. This only works when you use zip file as an update file.
         // AutoUpdater.ClearAppDirectory = true;
 
         // Uncomment following line if you want to execute different executable after the update. This only works when you use zip file as an update file.
-        AutoUpdater.ExecutablePath = "bin/AutoUpdaterTest.exe";
+        AutoUpdater.ExecutablePath = "AutoUpdaterTest.exe";
 
         // Uncomment following line to set this window as owner of the all dialogs initiated by AutoUpdater.
         AutoUpdater.SetOwner(this);
@@ -200,6 +202,6 @@ public partial class MainWindow : Window
         // Uncomment following line to change the Icon shown on the updater dialog.
         AutoUpdater.Icon = Resource.Icon;
 
-        AutoUpdater.Start("https://rbsoft.org/updates/AutoUpdaterTest.xml");
+        AutoUpdater.Start("/NewMESClient/ClientUpdate/UpdateVersion.xml", new SftpConfig() { Host="Sftpprd.lcfuturecenter.com",Port= 990, UserName= "NewMESClient",Password= "fX2%hH4]" });
     }
 }

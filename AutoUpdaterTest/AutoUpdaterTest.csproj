@@ -10,15 +10,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AutoUpdater.NET\AutoUpdater.NET.csproj"/>
+        <ProjectReference Include="..\AutoUpdater.NET\AutoUpdater.NET.SFTP.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="Resources\icon.png"/>
+        <Resource Include="Resources\icon.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +37,6 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
-        <Reference Include="System.Core"/>
+        <Reference Include="System.Core" />
     </ItemGroup>
 </Project>

@@ -293,9 +293,11 @@ public partial class FormMain : Form
                     string executablePath = string.IsNullOrWhiteSpace(updatedExe)
                         ? currentExe
                         : Path.Combine(extractionPath, updatedExe);
+                    _logBuilder?.AppendLine(executablePath);
                     var processStartInfo = new ProcessStartInfo(executablePath);
                     if (!string.IsNullOrEmpty(commandLineArgs))
                     {
+                        _logBuilder?.AppendLine(commandLineArgs);
                         processStartInfo.Arguments = commandLineArgs;
                     }
 
@@ -305,6 +307,7 @@ public partial class FormMain : Form
                 }
                 catch (Win32Exception exception)
                 {
+                    _logBuilder?.AppendLine(exception.ToString());
                     if (exception.NativeErrorCode != 1223)
                     {
                         throw;

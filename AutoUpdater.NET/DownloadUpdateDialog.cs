@@ -22,7 +22,7 @@ internal partial class DownloadUpdateDialog : Form
 
     private string _tempFile;
 
-    private MyWebClient _webClient;
+    private IDownClient _webClient;
 
     public DownloadUpdateDialog(UpdateInfoEventArgs args)
     {
@@ -44,9 +44,9 @@ internal partial class DownloadUpdateDialog : Form
 
     private void DownloadUpdateDialogLoad(object sender, EventArgs e)
     {
-        var uri = new Uri(_args.DownloadURL);
+        var uri = _args.DownloadURL;
 
-        _webClient = AutoUpdater.GetWebClient(uri, AutoUpdater.BasicAuthDownload);
+        _webClient = AutoUpdater.GetWebClient(null, AutoUpdater.BasicAuthDownload);
 
         if (string.IsNullOrEmpty(AutoUpdater.DownloadPath))
         {
@@ -81,17 +81,26 @@ internal partial class DownloadUpdateDialog : Form
             if (totalSeconds > 0)
             {
                 long bytesPerSecond = e.BytesReceived / totalSeconds;
+                labelInformation.BeginInvoke(() => {
                 labelInformation.Text =
                     string.Format(Resources.DownloadSpeedMessage, BytesToString(bytesPerSecond));
+                });
             }
         }
 
-        labelSize.Text = $@"{BytesToString(e.BytesReceived)} / {BytesToString(e.TotalBytesToReceive)}";
-        progressBar.Value = e.ProgressPercentage;
+        labelSize.BeginInvoke(()=> {
+
+            labelSize.Text = $@"{BytesToString(e.BytesReceived)} / {BytesToString(e.TotalBytesToReceive)}";
+        });
+        progressBar.BeginInvoke(() =>
+        {
+            progressBar.Value = e.ProgressPercentage;
+        });
     }
 
     private void WebClientOnDownloadFileCompleted(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
     {
+        this.BeginInvoke(() => {
         if (asyncCompletedEventArgs.Cancelled)
         {
             return;
@@ -109,25 +118,24 @@ internal partial class DownloadUpdateDialog : Form
                 CompareChecksum(_tempFile, _args.CheckSum);
             }
 
-            // Try to parse the content disposition header if it exists.
-            ContentDisposition contentDisposition = null;
-            if (!string.IsNullOrWhiteSpace(_webClient.ResponseHeaders?["Content-Disposition"]))
-            {
-                try
-                {
-                    contentDisposition =
-                        new ContentDisposition(_webClient.ResponseHeaders["Content-Disposition"]);
-                }
-                catch (FormatException)
-                {
-                    // Ignore content disposition header if it is wrongly formatted.
-                    contentDisposition = null;
-                }
-            }
+            //// Try to parse the content disposition header if it exists.
+            //ContentDisposition contentDisposition = null;
+            //if (!string.IsNullOrWhiteSpace(_webClient.ResponseHeaders?["Content-Disposition"]))
+            //{
+            //    try
+            //    {
+            //        contentDisposition =
+            //            new ContentDisposition(_webClient.ResponseHeaders["Content-Disposition"]);
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        // Ignore content disposition header if it is wrongly formatted.
+            //        contentDisposition = null;
+            //    }
+            //}
 
-            string fileName = string.IsNullOrEmpty(contentDisposition?.FileName)
-                ? Path.GetFileName(_webClient.ResponseUri.LocalPath)
-                : contentDisposition.FileName;
+            string fileName = Path.GetFileName(_webClient.ResponseUri.LocalPath);
+
 
             if (string.IsNullOrWhiteSpace(fileName))
             {
@@ -269,6 +277,7 @@ internal partial class DownloadUpdateDialog : Form
             FormClosing -= DownloadUpdateDialog_FormClosing;
             Close();
         }
+        });
     }
 
     private static string BytesToString(long byteCount)
